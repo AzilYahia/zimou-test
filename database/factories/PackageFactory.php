@@ -16,7 +16,7 @@ class PackageFactory extends Factory
     {
         return [
             'uuid' => $this->faker->uuid,
-            'tracking_code' => $this->faker->unique()->numerify('TRACK###########'),
+            'tracking_code' => $this->faker->unique()->numerify('TRACK####'),
             'commune_id' => $this->faker->randomNumber(),
             'delivery_type_id' => DeliveryType::inRandomOrder()->first()->id, // Random delivery type
             'status_id' => PackageStatus::inRandomOrder()->first()->id, // Random package status
