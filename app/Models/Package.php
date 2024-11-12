@@ -21,23 +21,50 @@ class Package extends Model
         'return_price', 'total_price', 'weight'
     ];
 
-    // Define the relationships
+    // Define a custom create method
+    public static function createManual(array $attributes)
+    {
+        // Manually create a new instance of the Package model
+        $package = new self();
 
-    // Each package belongs to one store
+        // Loop through each attribute and assign it to the model
+        foreach ($attributes as $key => $value) {
+            if (array_key_exists($key, $package->getFillable())) {
+                $package->$key = $value;
+            }
+        }
+
+        try {
+            // Save the package instance to the database
+            $package->save();
+        }
+        catch (\Exception $e) {
+            \Log::error('Error saving package: ' . $e->getMessage());
+            throw $e;  // Re-throw the exception after logging it
+        }
+
+        // Return the created package (optional)
+        return $package;
+    }
+
+    // Relationships (same as before)
     public function store()
     {
         return $this->belongsTo(Store::class);
     }
 
-    // Each package has a delivery type
     public function deliveryType()
     {
-        return $this->belongsTo(DeliveryType::class); // The foreign key is 'delivery_type_id'
+        return $this->belongsTo(DeliveryType::class);
     }
 
-    // Each package has a status
     public function status()
     {
-        return $this->belongsTo(PackageStatus::class, 'status_id'); // The foreign key is 'status_id'
+        return $this->belongsTo(PackageStatus::class, 'status_id');
+    }
+
+    public function commune()
+    {
+        return $this->belongsTo(Commune::class, 'commune_id');
     }
 }

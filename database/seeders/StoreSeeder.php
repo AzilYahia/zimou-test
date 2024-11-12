@@ -15,6 +15,7 @@ class StoreSeeder extends Seeder
     {
         // Create 5000 stores
         Store::factory(5000)->create()->each(function ($store) {
+            \Faker\Factory::create()->unique(true);
             // Create 100 packages for each store
             Package::factory(100)->create([
                 'store_id' => $store->id, // Correct store_id from current store
