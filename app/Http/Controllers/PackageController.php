@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-    use App\Models\Package;
+use App\Models\Package;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
@@ -79,12 +79,11 @@ public function create()
         Package::create($validatedData);
     }
     catch (Exception $e) {
-          dd($request->all());  // Dump all incoming data and stop execution
 
          return redirect()->route('packages.create')->with('error', 'An error occurred while creating the package.');
     }
 
-  dd($request->all());  // Dump all incoming data and stop execution
+
     // Redirect back to the index page with a success message
     return redirect()->route('packages.index')->with('success', 'Package created successfully!');
 }
