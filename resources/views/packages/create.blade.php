@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <h2>Create New Package</h2>
-        <form action="{{ route('packages.store') }}" method="POST">
+          <form action="{{ route('packages.store') }}" method="POST">
             @csrf
 
             <div class="form-group">
@@ -86,9 +86,21 @@
                 <input type="number" step="0.01" name="total_price" class="form-control" >
             </div>
 
-            <!-- Add more form fields as necessary based on your model's attributes -->
 
             <button type="submit" class="btn btn-primary">Create Package</button>
         </form>
     </div>
 @endsection
+
+
+
+
+
+
+
+
+
+
+
+
+
